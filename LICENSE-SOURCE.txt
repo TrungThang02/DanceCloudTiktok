@@ -1,0 +1,11 @@
+DIEU KHOAN BAN FULL SOURCE KHONG DOC QUYEN
+
+1. Nguoi mua nhan quyen su dung source vinh vien va khong doc quyen.
+2. Nguoi mua duoc sua doi, doi thuong hieu, build, van hanh va thuong mai san pham.
+3. Source duoc ban theo hien trang, khong kem ho tro ky thuat va khong kem cap nhat.
+4. Nguoi ban van giu quyen tiep tuc phat trien, su dung va ban source cho ben khac.
+5. Tai khoan, mat khau, khoa rieng, du lieu khach hang va ha tang Cloudflare cua
+   nguoi ban khong nam trong goi ban.
+6. Tai nguyen ben thu ba phai tuan theo giay phep rieng cua nha cung cap.
+
+Khong co khoa kich hoat hoac gioi han ky thuat nao duoc chen trong ban source nay.

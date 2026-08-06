@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Disco Control</title>
+    <link rel="stylesheet" href="control.css">
+</head>
+<body>
+    <main class="control-shell">
+        <header>
+            <div>
+                <p class="eyebrow">TIKTOK LIVE GAME</p>
+                <h1>Cloud Disco Control</h1>
+            </div>
+        </header>
+
+        <section class="status-card">
+            <span id="status-dot"></span>
+            <div>
+                <strong id="status-title">Đang kết nối máy chủ</strong>
+                <p id="status-message">Vui lòng chờ…</p>
+            </div>
+        </section>
+
+        <div class="grid">
+            <section class="card">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">LIVE</p>
+                        <h2>Kết nối qua TikFinity</h2>
+                    </div>
+                </div>
+                <label for="username">Username đang live</label>
+                <div class="input-row">
+                    <input id="username" maxlength="25" placeholder="@username" autocomplete="off">
+                    <button id="connect" class="primary">Kết nối</button>
+                </div>
+                <p class="help">Mở TikFinity Desktop và kết nối tài khoản LIVE trước. Game nhận sự kiện tại cổng 21213.</p>
+                <button id="disconnect" class="secondary full">Ngắt kết nối</button>
+            </section>
+
+            <section class="card wide master-card">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">MASTER RULES</p>
+                        <h2>Điều kiện → hành động</h2>
+                    </div>
+                    <div class="master-actions">
+                        <button id="add-master-rule">+ Thêm luật</button>
+                        <button id="save-master" class="primary">Lưu & áp dụng</button>
+                    </div>
+                </div>
+                <div class="master-settings">
+                    <label>Người chơi được vào sàn khi
+                        <select id="join-mode">
+                            <option value="keyword_only">Gõ đúng lệnh tham gia</option>
+                            <option value="all_interactions">Có bất kỳ tương tác nào</option>
+                        </select>
+                    </label>
+                    <label class="check-field">
+                        <input id="gift-always-joins" type="checkbox" checked>
+                        Người tặng gift luôn được vào sàn
+                    </label>
+                </div>
+                <p class="help">Ưu tiên Gift ID; tên và bí danh cách nhau bằng dấu phẩy. Các thay đổi áp dụng ngay, không cần build lại Unity.</p>
+                <div id="master-message" class="master-message" aria-live="polite"></div>
+                <div class="recent-gifts-wrap">
+                    <strong>Thư viện gift TikFinity đã học:</strong>
+                    <p class="help">Mỗi gift thật sẽ tự lưu Gift ID, tên, giá kim cương và ảnh. Bấm vào gift để thêm luật chính xác.</p>
+                    <div id="recent-gifts" class="recent-gifts"><span class="muted">Chưa nhận gift thật nào từ TikFinity.</span></div>
+                </div>
+                <div class="rule-table-head">
+                    <span>Bật / nguồn</span><span>Điều kiện</span><span>Hành động</span><span>Hiệu ứng</span><span>Thao tác</span>
+                </div>
+                <div id="master-rules" class="master-rules"></div>
+            </section>
+
+            <section class="card wide">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">STAGE THEME</p>
+                        <h2>Chủ đề sân khấu</h2>
+                    </div>
+                </div>
+                <p class="help">Thay đổi ngay lập tức phông nền sân khấu và ánh sáng không gian trong Unity Game.</p>
+                <div class="theme-grid">
+                    <button class="theme-btn active" data-theme-index="0" data-theme-id="premium-stage-v2">
+                        <span class="theme-icon">🌌</span>
+                        <span class="theme-title">Cyber Disco</span>
+                        <span class="theme-tag">Mặc định</span>
+                    </button>
+                    <button class="theme-btn" data-theme-index="1" data-theme-id="stage-gold-palace">
+                        <span class="theme-icon">👑</span>
+                        <span class="theme-title">Cung Điện Vàng</span>
+                        <span class="theme-tag">Hoàng Gia</span>
+                    </button>
+                    <button class="theme-btn" data-theme-index="2" data-theme-id="stage-heaven-angel">
+                        <span class="theme-icon">👼</span>
+                        <span class="theme-title">Thiên Đường</span>
+                        <span class="theme-tag">Ánh Sáng</span>
+                    </button>
+                    <button class="theme-btn" data-theme-index="3" data-theme-id="stage-inferno-hell">
+                        <span class="theme-icon">👹</span>
+                        <span class="theme-title">Địa Ngục Red</span>
+                        <span class="theme-tag">Quỷ Lửa</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">TEST LAB</p>
+                        <h2>Chạy phòng demo</h2>
+                    </div>
+                </div>
+                <p class="help">Tạo người xem giả và phát sự kiện liên tục qua đúng pipeline của live.</p>
+                <div class="button-grid">
+                    <button data-demo-count="10">10 người</button>
+                    <button data-demo-count="30">30 người</button>
+                    <button data-demo-count="60">60 người</button>
+                    <button data-demo-count="400">400 người</button>
+                    <button id="stop-demo" class="danger">Dừng demo</button>
+                </div>
+            </section>
+
+            <section class="card wide">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">EVENT TRIGGERS</p>
+                        <h2>Giả lập tương tác</h2>
+                    </div>
+                    <label class="mini-field">Dancer #
+                        <input id="user-index" type="number" min="1" max="60" value="1">
+                    </label>
+                </div>
+                <div class="action-grid">
+                    <button data-action="member">👋 Thêm người</button>
+                    <button data-action="dance">🕺 Nhảy</button>
+                    <button data-action="jump">⬆️ Nhảy cao</button>
+                    <button data-action="walk">🚶 Đi vòng</button>
+                    <button data-action="change">🎭 Đổi nhân vật</button>
+                    <button data-action="like" data-value="50">❤️ 50 like</button>
+                    <button data-action="follow">💖 Follow</button>
+                    <button data-action="share">📣 Share</button>
+                    <button data-action="gift" data-value="1">🌹 Gift 1</button>
+                    <button data-action="gift" data-value="1" data-gift-name="TikTok">🎵 TikTok · Đổi nhân vật</button>
+                    <button data-action="gift" data-value="5" data-gift-name="Finger Heart">🫰 Finger Heart · Đi vòng</button>
+                    <button data-action="gift" data-value="20" data-gift-name="Portal">🌀 Portal · Phóng to</button>
+                    <button data-action="gift" data-value="1000" data-gift-name="TikTok Universe">🌌 Universe · Top DJ</button>
+                    <button data-action="gift" data-value="5">🕺 Gift 5 · Nhảy sung</button>
+                    <button data-action="gift" data-value="20">📸 Gift 20 · Camera</button>
+                    <button data-action="gift" data-value="50">🔥 Gift 50 · Vua sàn</button>
+                    <button data-action="gift" data-value="100" class="gold">👑 Gift 100 · VIP</button>
+                    <button data-action="gift" data-value="200">💎 Gift 200 · Siêu VIP</button>
+                    <button data-action="gift" data-value="500">🎇 Gift 500 · Mưa pháo hoa</button>
+                    <button data-action="gift" data-value="1000" class="gold">🏆 Gift 1000 · Đại gia</button>
+                </div>
+            </section>
+
+            <section class="card wide">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">SESSION</p>
+                        <h2>Thống kê</h2>
+                    </div>
+                    <button id="reset" class="danger compact">Reset game</button>
+                </div>
+                <div class="stats">
+                    <div><span>Sự kiện</span><strong id="metric-events">0</strong></div>
+                    <div><span>Người vào</span><strong id="metric-members">0</strong></div>
+                    <div><span>Bình luận</span><strong id="metric-chats">0</strong></div>
+                    <div><span>Gift</span><strong id="metric-gifts">0</strong></div>
+                    <div><span>Diamond</span><strong id="metric-diamonds">0</strong></div>
+                    <div><span>Like</span><strong id="metric-likes">0</strong></div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <template id="master-rule-template">
+        <article class="master-rule-row">
+            <div class="rule-source">
+                <label class="check-field"><input data-field="enabled" type="checkbox"> Bật</label>
+                <select data-field="source"><option value="chat">Bình luận</option><option value="gift">Gift</option></select>
+                <select data-field="match"><option value="exact">Khớp chính xác</option><option value="contains">Có chứa</option></select>
+            </div>
+            <div class="rule-condition">
+                <input data-field="trigger" placeholder="hey hoặc rose, hoa hồng">
+                <input data-field="giftId" placeholder="Gift ID (nếu có)">
+                <input data-field="displayDiamonds" type="number" min="0" placeholder="Giá kim cương">
+            </div>
+            <div class="rule-action">
+                <select data-field="action">
+                    <option value="join">Tham gia sàn</option>
+                    <option value="dance">Nhảy</option>
+                    <option value="camera">Zoom camera</option>
+                    <option value="change">Đổi nhân vật</option>
+                    <option value="walk">Đi vòng</option>
+                    <option value="grow">Phóng lớn</option>
+                    <option value="medal">Cánh + huy hiệu</option>
+                    <option value="vip">VIP camera</option>
+                    <option value="topdj">Top DJ + pháo hoa</option>
+                    <option value="fireworks">Pháo hoa</option>
+                </select>
+                <label>Thời lượng (giây)<input data-field="durationSeconds" type="number" min="0" max="300" step="0.5"></label>
+            </div>
+            <div class="rule-effect">
+                <input data-field="label" placeholder="Chữ banner / huy hiệu">
+                <select data-field="variant">
+                    <option value="">Mặc định</option><option value="aura">Aura</option><option value="neon">Neon</option><option value="fire">Lửa</option><option value="royal">Hoàng gia</option>
+                </select>
+                <label>Pháo hoa<input data-field="fireworkBursts" type="number" min="0" max="12"></label>
+            </div>
+            <div class="rule-buttons">
+                <button data-command="test" class="gold">Test</button>
+                <button data-command="delete" class="danger">Xóa</button>
+            </div>
+        </article>
+    </template>
+    <script src="control.js"></script>
+</body>
+</html>
